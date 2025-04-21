@@ -1,0 +1,44 @@
+package labtuan3;
+public class Coordinate {
+    private int x;
+    private int y;
+    public Coordinate() {
+        this.x = 0;
+        this.y = 0;
+    }
+    public Coordinate(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+    public Coordinate cong(Coordinate other) {
+        return new Coordinate(this.x + other.x, this.y + other.y);
+    }
+    public Coordinate doiXungTrucHoanh() {
+        return new Coordinate(this.x, -this.y);
+    }
+    public void inToaDo() {
+        System.out.println("(" + x + ", " + y + ")");
+    }
+}
+package labtuan3;
+public class DemoCoordinate {
+    public static void main(String[] args) {
+        Coordinate d1 = new Coordinate(3, 4);
+        Coordinate d2 = new Coordinate(1, 2);
+
+        System.out.print("Điểm d1: ");
+        d1.inToaDo();
+
+        System.out.print("Điểm d2: ");
+        d2.inToaDo();
+
+        Coordinate tong = d1.cong(d2);
+        System.out.print("Tổng d1 + d2: ");
+        tong.inToaDo();
+
+        Coordinate doiXung = d1.doiXungTrucHoanh();
+        System.out.print("Điểm d1 đối xứng qua trục hoành: ");
+        doiXung.inToaDo();
+    }
+}
+Việt
