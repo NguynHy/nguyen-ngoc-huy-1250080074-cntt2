@@ -1,0 +1,138 @@
+package labtuan3;
+import java.util.Scanner;
+public class HocSinh {
+    private int maso;
+    private String hoten;
+    private float dtb;
+    public int getMaso() {
+        return maso;
+    }
+    public void setMaso(int maso) {
+        this.maso = maso;
+    }
+    public String getHoten() {
+        return hoten;
+    }
+    public void setHoten(String hoten) {
+        this.hoten = hoten;
+    }
+    public float getDtb() {
+        return dtb;
+    }
+    public void setDtb(float dtb) {
+        this.dtb = dtb;
+    }
+    public HocSinh() {
+        this.maso = 0;
+        this.hoten = "";
+        this.dtb = 0.0f;
+    }
+    public HocSinh(int maso, String hoten, float dtb) {
+        this.maso = maso;
+        this.hoten = hoten;
+        this.dtb = dtb;
+    }
+    public HocSinh(labtuan3.HocSinh tmp) {
+        this.maso = tmp.maso;
+        this.hoten = tmp.hoten;
+        this.dtb = tmp.dtb;
+    }
+    public void input() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap ma so: ");
+        maso = sc.nextInt();
+        sc.nextLine();
+        System.out.print("Nhap ho ten: ");
+        hoten = sc.nextLine();
+        System.out.print("Nhap diem trung binh: ");
+        dtb = sc.nextFloat();
+    }
+    public void output() {
+        System.out.println("Ma so: " + maso + ", Ho ten: " + hoten + ", Diem TB: " + dtb);
+    }
+    public void rank() {
+        if (dtb < 5)
+            System.out.println("Xep loai: Yeu");
+        else if (dtb < 7)
+            System.out.println("Xep loai: Trung binh");
+        else if (dtb < 8.5)
+            System.out.println("Xep loai: Kha");
+        else
+            System.out.println("Xep loai: Gioi");
+    }
+}
+
+package labtuan3;
+import labtuan3.HocSinh;
+
+import java.util.Scanner;
+
+public class Demo1 {
+    public static void main(String[] args) {
+        HocSinh hs1 = new HocSinh();
+        hs1.input();
+        hs1.output();
+        HocSinh hs2 = new HocSinh(111, "Nguyen Ngoc Huy", 10f);
+        hs2.output();
+        HocSinh hs3 = new HocSinh(222, "Ngoc Huy Nguyen", 10f);
+        hs3.output();
+        hs3.setHoten("Huy Ngoc Nguyen");
+        hs3.output();
+        float max = hs1.getDtb();
+        String ht = hs1.getHoten();
+        if (hs2.getDtb() > max) {
+            max = hs2.getDtb();
+            ht = hs2.getHoten();
+        }
+        if (hs3.getDtb() > max) {
+            max = hs3.getDtb();
+            ht = hs3.getHoten();
+        }
+        System.out.println("Hoc sinh co DTB cao nhat: " + ht + " voi DTB: " + max);
+    }
+}
+
+package labtuan3;
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Comparator;
+import labtuan3.HocSinh;
+public class DSHocSinh {
+    private HocSinh[] ds;
+    private int soluong;
+    public void nhapDS() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap so luong hoc sinh: ");
+        soluong = sc.nextInt();
+        ds = new HocSinh[soluong];
+        for (int i = 0; i < soluong; i++) {
+            System.out.println("Nhap thong tin hoc sinh thu " + (i + 1) + ":");
+            ds[i] = new HocSinh();
+            ds[i].input();
+        }
+    }
+    public void xuatDS() {
+        System.out.println("\nDanh sach hoc sinh:");
+        for (HocSinh hs : ds) {
+            hs.output();
+        }
+    }
+    public void sapXep() {
+        Arrays.sort(ds, new Comparator<HocSinh>() {
+            public int compare(HocSinh a, HocSinh b) {
+                return Float.compare(b.getDtb(), a.getDtb());
+            }
+        });
+    }
+}
+
+package labtuan3;
+import labtuan3.DSHocSinh;
+public class Demo2 {
+    public static void main(String[] args) {
+        DSHocSinh danhsach = new DSHocSinh();
+        danhsach.nhapDS();
+        danhsach.sapXep();
+        danhsach.xuatDS();
+    }
+}
